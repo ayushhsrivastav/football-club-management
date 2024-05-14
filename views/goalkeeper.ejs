@@ -1,0 +1,132 @@
+<html>
+<head>
+	<title><%= title %> </title>
+	<link rel="shortcut icon" type="image/png" href="images/foot.png">
+	<meta charset="UTF-8">
+
+	<style>
+		*{border-radius: 0px !important}
+	</style>
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+-->
+
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- //for bootstrap working -->
+
+
+</head>
+
+<body>
+<div class="header" id="home">
+	<div class="banner_header_top_agile_w3ls">
+			<div class="header-top-wthree-agileits">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header navbar-left">
+
+						<h1><a class="navbar-brand" href="/"> Football</a></h1>
+					</div>
+
+					<div class="header_left">
+
+					<% if(!(isAuthenticated)) { %>
+						<ul>
+							<li><a class="shop" href="./login">Login</a></li>
+						</ul> <%} %>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+
+						<div class="top_nav_left">
+							<nav class="cl-effect-15" id="cl-effect-15">
+								<ul>
+									<li class="active"><a href="/" data-hover="Home">Home</a></li>
+									<li><a href="/player" data-hover="Player">Player</a></li>
+									<li><a href="/teams" data-hover="Team">Team</a></li>
+
+									<% if(!(isAuthenticated)) { %>
+									<li><a href="/register" data-hover="Register">Register</a></li>
+									<%} %>
+									<% if(isAuthenticated) { %>
+									<li><a href="/profile" data-hover="Profile">Profile</a></li>
+									<% } %>
+									<li><a href="/fixtures" data-hover="Fixtures">Fixtures</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+
+					<!-- search -->
+					<div class="search">
+						<div class="cd-main-header">
+							<ul class="cd-header-buttons">
+								<li><a class="cd-search-trigger" href="/search"> <span></span></a></li>
+							</ul>
+						</div>
+						<div id="cd-search" class="cd-search">
+							<form action="/search" method="POST" encType="multipart/form-data">
+								<input name="search" type="search" placeholder="Click enter after typing...">
+							</form>
+						</div>
+					</div>
+					<!-- //search -->
+
+					<div class="clearfix"></div>
+				</nav>
+			</div>
+		</div>
+</div>
+
+<br>
+	<div class="col-sm-9" style="margin-left: 180px;">
+            <ul class="nav nav-tabs">
+                <li style="width: 25%;text-align: center;"><a data-toggle="tab" href="/transfer">Strikers</a></li>
+                <li style="width: 25%;text-align: center;"><a data-toggle="tab" href="/midfielder" > Mid Fielders</a></li>
+                <li style="width: 25%;text-align: center;"><a data-toggle="tab" href="/defender" > Defenders </a></li>
+                <li style="width: 25%;text-align: center;" class="active"><a data-toggle="tab" href="/goalkeeper" > Goal keepers </a></li>
+            </ul>
+     </div>
+
+<br><br><hr style="solid">
+
+
+<div class="=" style="margin-right: 100px;margin-left: 100px">
+	<div class="col s12">
+		<% if(undefined!=items && items.length > 0) { %>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width:10%;text-align:center;">Player ID</th>
+						<th style="width:30%;text-align:center;">Name</th>
+						<th style="width: 15%;text-align: center;">Position</th>
+						<th style="width: 15%;text-align: center;">Rating</th>
+						<th style="width: 15%;text-align: center;">Country</th>
+						<th style="width: 25%;text-align: center;">     </th>
+					</tr>
+				</thead>
+				<tbody>
+					<% items.forEach(function(item,index){ %>
+						<tr>
+							<td style="width: 10%;text-align: center;"><%= item.Player_ID %></td>
+							<td style="width: 30%;text-align:center;"><%= item.firstname %> <%= item.lastname %> </td>
+							<td style="width: 15%;text-align: center;"><%= item.Position %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Rating %></td>
+							<td style="width: 15%;text-align: center;"><%= item.Country %></td>
+							<td style="width: 25%;text-align: center;">
+								<a href="/player/<%= item.Player_ID %>" class="btn btn-success" style="background-color: blue">Profile</a>
+							</td>
+						</tr>
+					<% }); %>
+				</tbody>
+			</table>
+		<% }else{ %>
+			<p><strong>There are no records available</strong></p>
+		<% } %>
+	</div>
+</div>
+
+
+
+</body>
+</html>
